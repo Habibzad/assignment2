@@ -7,8 +7,8 @@ public class CDOffering {
 	
 	//Constructor
 	CDOffering(int term, double interestRate){
-		setTerm(term);
-		setInterestRate(interestRate);
+		this.term = term;
+		this.interestRate = interestRate;
 	}
 
 	//Getters
@@ -19,15 +19,5 @@ public class CDOffering {
 	public double getInterestRate() {
 		return interestRate;
 	}
-	
-	//Setters
-	public void setTerm(int term) {
-		this.term = term;
-	}
-
-	public void setInterestRate(double interestRate) {
-		this.interestRate = interestRate;
-	}
-
 	
 }

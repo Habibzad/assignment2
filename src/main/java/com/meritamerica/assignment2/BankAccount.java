@@ -1,8 +1,6 @@
 package com.meritamerica.assignment2;
 
 public class BankAccount {
-	//Static variables
-	private static final double INTEREST_RATE = 0.1;
 	
 	//Instance variables
 	private long accountNumber;
@@ -10,8 +8,9 @@ public class BankAccount {
 	private double interestRate;
 	
 	//Constructor
-	BankAccount(double balance){
+	BankAccount(double balance, double interestRate){
 		this.balance = balance;
+		this.interestRate = interestRate;
 	}
 	
 	BankAccount(long accountNumber, double balance, double interestRate){
@@ -58,7 +57,7 @@ public class BankAccount {
 	}
 	
 	double futureValue(int years) {
-		return balance*Math.pow((1+INTEREST_RATE), years);
+		return balance*Math.pow((1+interestRate), years);
 	}
 
 }

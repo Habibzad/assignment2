@@ -3,12 +3,14 @@ package com.meritamerica.assignment2;
 import java.util.Date;
 
 public class CDAccount {
-	private int term;
+	
+	private CDOffering offering = null;
 	private double balance;
-	private double interestRate;
-	private long accountNumber;
+	private Date date = new Date();
+	
 	CDAccount(CDOffering offering, double balance){
-		
+		this.offering=offering;
+		this.balance= balance;
 	}
 	
 	/*
@@ -18,27 +20,30 @@ public class CDAccount {
 	 */
 	
 	double getBalance() {
-		return balance;
+		if(balance > 0) {
+		    return balance;		
+		} else
+		return 0;
 	}
 	
 	double getInterestRate() {
-		return interestRate;
+		return offering.getInterestRate();
 	}
 	
 	int getTerm() {
-		return term;
+		return offering.getTerm();
 	}
 	
 	java.util.Date getStartDate(){
-		return null;
+		return date;
 		
 	}
 	
 	long getAccountNumber() {
-		return accountNumber;
+		return (long)((Math.ceil(Math.random()*10)+1000));
 	}
 	
 	double futureValue() {
-		return 0;
+		 return balance * Math.pow(1 + offering.getInterestRate(), offering.getTerm());
 	}
 }

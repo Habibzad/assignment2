@@ -2,15 +2,15 @@ package com.meritamerica.assignment2;
 
 public class MeritAmericaBankApp {
 	public static void main(String[] args) {
-		
-		CDOffering oneYearTerm, twoYearsTerm, threeYearsTerm, fourYearsTerm, fiveYearsTerm; 
-		
-		oneYearTerm = new CDOffering(1, 0.018);     //1.8%
-		twoYearsTerm = new CDOffering(2, 0.019);    //1.9%
-		threeYearsTerm = new CDOffering(3, 0.018);  //2.0%
-		fourYearsTerm = new CDOffering(5, 0.018);   //2.5%
-		fiveYearsTerm = new CDOffering(10, 0.018);  //2.2% ?????
-		
-		AccountHolder ah1 = new AccountHolder("Lisa", "", "Jphnson", "888-52-0052");
-	}
+	    
+	    CDOffering[] CDOfferings = new CDOffering[5];
+		CDOfferings[0] = new CDOffering(1, 1.8 / 100);
+		CDOfferings[1] = new CDOffering(2, 1.9 / 100);
+		CDOfferings[2] = new CDOffering(3, 2.0 / 100);
+		CDOfferings[3] = new CDOffering(5, 2.5 / 100);
+		CDOfferings[4] = new CDOffering(10, 2.2 / 100);
+		MeritBank.setCDOfferings(CDOfferings);
+	    AccountHolder ah1 = new AccountHolder("John", "", "Doe", "555-52-0010");
+	    
+	  }
 }

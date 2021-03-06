@@ -16,14 +16,19 @@ public class AccountHolder {
 	private String middleName;
 	private String lastName;
 	private String ssn;
-	
+	CheckingAccount[] checkingAccounts = new CheckingAccount[0];
+	SavingsAccount[] savingsAccounts = new SavingsAccount[0];
+	CDAccount[] cdAccounts = new CDAccount[0];
+	private int numberOfCheckingAccounts = 0;
+	private int numberOfSavingsAccounts = 0;
+	private int numberOfCDAccounts = 0;
+
 	//Default Constructor
-	AccountHolder(){
-			
-	}
+	AccountHolder(){}
 	
 	//Parametarized Constructor
-	AccountHolder(String firstName, String middleName, String lastName, String ssn){
+	AccountHolder(String firstName, String middleName, String lastName, String ssn)
+	{
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
@@ -51,53 +56,64 @@ public class AccountHolder {
 		return ssn;
 	}
 	
+	public int getNumberOfCheckingAccounts() {
+		return checkingAccounts.length;	
+	}
+	
+	public double getCheckingBalance() {
+		int counter = 0;
+	    int checkingBalance = 0;
+	    while(checkingAccounts[counter] != null) {
+	    	checkingBalance += checkingAccounts[counter].getBalance();
+	    	counter++;
+	    }
+	    return checkingBalance;
+	}
+	
+	public int getNumberOfSavingsAccounts(){
+		return savingsAccounts.length;
+		
+	}
+	
+	public double getSavingsBalance() {
+		int count = 0;
+	    double savingsBalance = 0;
+	    while(savingsAccounts[count] != null) {
+	    	savingsBalance += savingsAccounts[count].getBalance();
+	    	count++;
+	    }
+	    return savingsBalance;
+	}
+	
+	public int getNumberOfCDAccounts(){
+		return cdAccounts.length;
+	}
+	
+	public double getCDBalance() {
+		 int counter = 0;
+		    int totalCDBalance = 0;
+		    while(cdAccounts[counter] != null) {
+		    	totalCDBalance += cdAccounts[counter].getBalance();
+		    	counter++;
+		    }
+		    return totalCDBalance;
+	}
+	
+	public double getCombinedBalance() {
+		return getCheckingBalance() + getSavingsBalance () + getCDBalance();
+	}
+	
 	CheckingAccount[] getCheckingAccounts() {
-		return null;
-	}
-	
-	int getNumberOfCheckingAccounts() {
-		return 0;
-		
-	}
-	
-	double getCheckingBalance() {
-		return 0;
-		
+		return checkingAccounts ;
 	}
 	
 	SavingsAccount[] getSavingsAccounts() {
-		return null;
-		
-	}
-	
-	int getNumberOfSavingsAccounts(){
-		return 0;
-		
-	}
-	
-	double getSavingsBalance() {
-		return 0;
-		
+		return savingsAccounts;
 	}
 	
 	CDAccount[] getCDAccounts() {
-		return null;
+		return cdAccounts;
 	}
-	
-	int getNumberOfCDAccounts(){
-		return 0;
-		
-	}
-	
-	double getCDBalance() {
-		return 0;
-	}
-	
-	double getCombinedBalance() {
-		return 0;
-		
-	}
-	
 	/*
 	 *=======
 	 *Setters
@@ -123,30 +139,39 @@ public class AccountHolder {
 	 */
 	
 	CheckingAccount addCheckingAccount(double openingBalance) {
-		return null;
+		CheckingAccount newAccount = new CheckingAccount(openingBalance);
+		return newAccount;
 	}
 	
 	CheckingAccount addCheckingAccount(CheckingAccount checkingAccount) {
-		return null;
+		if(getCombinedBalance() < 245000) {
+			numberOfCheckingAccounts++;
+			return this.checkingAccounts[numberOfCheckingAccounts] = checkingAccount;
+		  }	else
+		  return null;
 	}
 	
 	SavingsAccount addSavingsAccount(double openingBalance) {
-		return null;
+		return new SavingsAccount(openingBalance);
 		
 	}
 	SavingsAccount addSavingsAccount(SavingsAccount savingsAccount) {
-		return savingsAccount;
+		 if(this.getCombinedBalance() < 245000) {
+			 numberOfSavingsAccounts++;
+			  return this.savingsAccounts[numberOfSavingsAccounts] = savingsAccount;
+		  }	else
+		  return null;
 		
 	}
 	
 	CDAccount addCDAccount(CDOffering offering, double openingBalance) {
-		return null;
+		return new CDAccount(offering, openingBalance);
 		
 	}
 	
 	CDAccount addCDAccount(CDAccount cdAccount) {
-		return cdAccount;
-		
+		numberOfCDAccounts++;
+		return this.cdAccounts[numberOfCDAccounts] = cdAccount;
 	}
 	
 	
