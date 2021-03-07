@@ -17,6 +17,7 @@ public class MeritAmericaBankApp {
 	 		System.out.println("acc1_holder=" + acc1_holder.getFirstName() + " " + acc1_holder.getLastName() + " ("
 	 				+ acc1_holder.getSSN() + ")");
 	 		System.out.println("=====================================================");
+	 		System.out.println("=====================================================");
 	 		// Add a checking account with an opening balance of $1,000 as well as
 	 		// a savings account with an opening balance of $10,000 to acc1
 	 		System.out.println("acc1_holder, opening balance of $1,000 and $10,000");
@@ -37,6 +38,7 @@ public class MeritAmericaBankApp {
 	 		
 	 		
 	 		System.out.println("=====================================================");
+	 		System.out.println("=====================================================");
 
 	 		// Add a checking account with an opening balance of $5,000 as well as a
 	 		// savings account with an opening balance of $50,000 to acc1
@@ -51,6 +53,7 @@ public class MeritAmericaBankApp {
 	 		}
 	 		System.out.println(
 	 				acc1_holder.getFirstName() + " has a current combined balance=" + acc1_holder.getCombinedBalance());
+	 		System.out.println("=====================================================");
 	 		System.out.println("=====================================================");
 
 	 		// Add a checking account with an opening balance of $50,000 as well as a
@@ -67,6 +70,7 @@ public class MeritAmericaBankApp {
 	 		System.out.println(
 	 				acc1_holder.getFirstName() + " has a current combined balance=" + acc1_holder.getCombinedBalance());
 	 		System.out.println("=====================================================");
+	 		System.out.println("=====================================================");
 
 	 		// Add a checking account with an opening balance of $5,000 as well as a
 	 		// savings account with an opening balance of $50,000 to acc1
@@ -82,6 +86,7 @@ public class MeritAmericaBankApp {
 	 		System.out.println(
 	 				acc1_holder.getFirstName() + " has a current combined balance=" + acc1_holder.getCombinedBalance());
 	 		System.out.println("=====================================================");
+	 		System.out.println("=====================================================");
 
 	 		// Add the best CD offering as a CD account on acc1
 	 		CDOffering bestOffer = MeritBank.getBestCDOffering(acc1_holder.getCombinedBalance());
@@ -92,6 +97,7 @@ public class MeritAmericaBankApp {
 	 			System.out.println("acc1_holder, best term=" + acc1_cdacct.getTerm());
 	 		}
 	 		System.out.println("=====================================================");
+	 		System.out.println("=====================================================");
 
 	 		// Add acc1 to Merit Bank's list of account holders
 	 		MeritBank.addAccountHolder(acc1_holder);
@@ -100,6 +106,7 @@ public class MeritAmericaBankApp {
 	 		AccountHolder acc2_holder = new AccountHolder("acc2", "assignment2", "", "Y123456789");
 	 		System.out.println("acc2_holder=" + acc2_holder.getFirstName() + " " + acc2_holder.getLastName() + " ("
 	 				+ acc2_holder.getSSN() + ")");
+	 		System.out.println("=====================================================");
 	 		System.out.println("=====================================================");
 
 	 		// Add a checking account with an opening balance of $1,000 as well as a
@@ -115,6 +122,7 @@ public class MeritAmericaBankApp {
 	 		}
 	 		System.out.println("acc2_holder, current combine balance=" + acc2_holder.getCombinedBalance());
 	 		System.out.println("=====================================================");
+	 		System.out.println("=====================================================");
 
 	 		// Add the second best CD offering as a CD account on acc2
 	 		CDOffering secondBestOffer = MeritBank.getSecondBestCDOffering(acc2_holder.getCombinedBalance());
@@ -124,6 +132,7 @@ public class MeritAmericaBankApp {
 	 			acc2_holder.addCDAccount(acc2_cdacct);
 	 			System.out.println("acc2_holder, 2nd best term=" + acc2_cdacct.getTerm());
 	 		}
+	 		System.out.println("=====================================================");
 	 		System.out.println("=====================================================");
 
 	 		// Add acc1 to Merit Bank list of account holders
@@ -137,6 +146,7 @@ public class MeritAmericaBankApp {
 	 		System.out.println("acc3_holder=" + acc3_holder.getFirstName() + " " + acc3_holder.getLastName() + " ("
 	 				+ acc3_holder.getSSN() + ")");
 	 		System.out.println("=====================================================");
+	 		System.out.println("=====================================================");
 
 	 		// Add the second best CD offering as a CD account on acc3
 	 		CDOffering secondBestOffer2 = MeritBank.getSecondBestCDOffering(acc3_holder.getCombinedBalance());
@@ -148,6 +158,7 @@ public class MeritAmericaBankApp {
 	 		}
 	 		;
 
+	 		System.out.println("=====================================================");
 	 		System.out.println("=====================================================");
 
 	 		// Add a checking account with an opening balance of $1,000 as well as a
@@ -163,6 +174,7 @@ public class MeritAmericaBankApp {
 	 		}
 	 		System.out.println("acc3_holder, current combine balance=" + acc3_holder.getCombinedBalance());
 	 		System.out.println("=====================================================");
+	 		System.out.println("=====================================================");
 
 	 		// Add acc3 to Merit Bank's list of account holders
 	 		MeritBank.addAccountHolder(acc3_holder);
@@ -171,6 +183,7 @@ public class MeritAmericaBankApp {
 	 		double bankTotalBalance = MeritBank.totalBalances();
 	 		System.out
 	 				.println("The total balance of all accounts held by Merit Bank's account holders= " + bankTotalBalance);
+	 		System.out.println("=====================================================");
 	 		System.out.println("=====================================================");
 
 	  }
