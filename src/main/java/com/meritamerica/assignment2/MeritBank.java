@@ -1,77 +1,105 @@
 package com.meritamerica.assignment2;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
 public class MeritBank {
-	private static CDOffering[] cdOfferings = new CDOffering[5];
-	private static AccountHolder[] accountHolders = new AccountHolder[10];
-	private static int accountIndex = 0;
+    private static ArrayList<CDOffering> cdOfferings = new ArrayList<CDOffering>();
+    private static ArrayList<AccountHolder> accountHolders = new ArrayList<AccountHolder>();
+    private static long getAccountNumber = 100000;
+    public static double accountLimit = 250000.0;
 
-  static void addAccountHolder(AccountHolder accountHolder) {
-    accountHolders[accountIndex] = accountHolder;
-    accountIndex++;
-  }
+    static void addAccountHolder(AccountHolder accountHolder) {
+    	accountHolders.add(accountHolder);
+    }
 
-  static AccountHolder[] getAccountHolders() {
-	  return accountHolders;
-  }
+    static AccountHolder[] getAccountHolders() {
+    	AccountHolder[] accounts = accountHolders.toArray(new AccountHolder[accountHolders.size()]);
+        return accounts;
+    }
 
-  static CDOffering[] getCDOfferings() {
-	  return cdOfferings;
-  }
+    static CDOffering[] getCDOfferings() {
+    	CDOffering[] accounts = cdOfferings.toArray(new CDOffering[cdOfferings.size()]);
+        return accounts;
+    }
 
-  static CDOffering getBestCDOffering(double depositAmount) {
-	  double max = 0;
-	  int cdNum = 0;
-	  for(int i = 0; i < cdOfferings.length; i++) {
-		  double value = futureValue(depositAmount, cdOfferings[i].getInterestRate(), cdOfferings[i].getTerm());
-		  if(value >= max) {
-			  max = value;
-			  cdNum = i;
-		  }
-	  }
-	  return cdOfferings[cdNum];
-  }
+    static CDOffering getBestCDOffering(double depositAmount) {
+    	System.out.println("cdOfferings.size()=" + cdOfferings.size());
+        if (cdOfferings.size() <= 0) {
+            return null;
+        }
+        ArrayList<Double> offerAmounts = new ArrayList<Double>();
+        for (int i = 0; i < cdOfferings.size(); i++) {
+            offerAmounts.add(depositAmount * cdOfferings.get(i).getInterestRate());
+        }
+        int bestIndex = getMax(offerAmounts, -1);
+        return cdOfferings.get(bestIndex);
+    }
 
-  static CDOffering getSecondBestCDOffering(double depositAmount) {
-	  double max = 0;
-	  int cdNum = 0;
-	  int lastCDNum = 0;
-	  for(int i = 0; i < cdOfferings.length; i++) {
-		  double value = futureValue(depositAmount, cdOfferings[i].getInterestRate(), cdOfferings[i].getTerm());
-		  if(value >= max) {
-			  max = value;
-			  lastCDNum = cdNum;
-			  cdNum = i;
-		  }
-	  }
-	  return cdOfferings[lastCDNum];
-  }
+    static CDOffering getSecondBestCDOffering(double depositAmount) {
+    	System.out.println("cdOfferings.size()=" + cdOfferings.size());
 
-  static void clearCDOfferings() {
-	  cdOfferings = null;
-  }
+        if (cdOfferings.size() <= 0) {
+            return null;
+        }
+        ArrayList<Double> offerAmounts = new ArrayList<Double>();
+        for (int i = 0; i < cdOfferings.size(); i++) {
+            offerAmounts.add(depositAmount * cdOfferings.get(i).getInterestRate());
+        }
+        int bestIndex = getMax(offerAmounts, -1);
+        double bestOffer = (double) offerAmounts.get(bestIndex);
+        int secondIndex = getMax(offerAmounts, bestOffer);
 
-  static void setCDOfferings(CDOffering[] offerings) {
-	  cdOfferings = offerings;
-  }
+        return cdOfferings.get(secondIndex);
+    }
 
-  static long getNextAccountNumber() {
-	  return (long)((Math.random() * 15) + 5);	// TODO
-  }
+    static void clearCDOfferings() {
+    	cdOfferings.clear();
+    }
 
-  static double totalBalances() {
-	  int count = 0;
-	    int total = 0;
-	    while(accountHolders[count] != null) {
-	    	total += accountHolders[count].getCombinedBalance();
-	    	count++;
-	    }
-	    return total;
-  }
+    static void setCDOfferings(CDOffering[] offerings) {
+    	for (CDOffering offering : offerings)
+            cdOfferings.add(offering);
+    }
 
-  static double futureValue(double presentValue, double interestRate, int term) {
-	  return presentValue * Math.pow(1 + interestRate, term);
-  }
+    static long getNextAccountNumber() {
+    	getAccountNumber += 1;
+        return getAccountNumber;
+    }
+
+    static double totalBalances() {
+    	double totalBalances = 0;
+        for (AccountHolder accountHolder : accountHolders) {
+            totalBalances += accountHolder.getCombinedBalance();
+        }
+        return totalBalances;
+    }
+
+    static double futureValue(double presentValue, double interestRate, int term) {
+    	double futureBalanace = 0;
+        futureBalanace = presentValue * Math.pow(1 + interestRate, term);
+        return futureBalanace;
+    }
+    
+    public static int getMax(ArrayList<Double> valueList, double valueCompare) {
+        double maxValue = valueList.get(0);
+        int maxIndex = 0;
+        for (int i = 1; i < valueList.size(); i++) {
+            boolean isMax = false;
+            double value = valueList.get(i);
+            if (valueCompare < 0) {
+                isMax = value > maxValue;
+            } else {
+                isMax = (value > maxValue) && (value < valueCompare);
+            }
+
+            if (isMax) {
+                maxValue = value;
+                maxIndex = i;
+            }
+        }
+
+        return maxIndex;
+    }
 }

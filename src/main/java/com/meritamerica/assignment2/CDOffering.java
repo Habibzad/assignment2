@@ -13,11 +13,11 @@ public class CDOffering {
 
 	//Getters
 	public int getTerm() {
-		return term;
+		return this.term;
 	}
 
 	public double getInterestRate() {
-		return interestRate;
+		return this.interestRate;
 	}
 	
 }
