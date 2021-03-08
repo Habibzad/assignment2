@@ -2,56 +2,26 @@ package com.meritamerica.assignment2;
 
 import java.util.Date;
 
-public class CDAccount extends BankAccount{
-	private int term;
-    private CDOffering offering;
-    private double balance;
-    private Date startDate;
+public class CDAccount extends BankAccount {
 
-    CDAccount(CDOffering offering, double balance) {
-    	super(balance, offering.getInterestRate());
+    private Date startDate;
+    private CDOffering offering;
+
+    public CDAccount(CDOffering offering, double balance) {
+        super(balance, offering.getInterestRate());
         this.offering = offering;
-        this.balance = balance;
+        this.startDate = new Date();
     }
 
     /*
      * =========== Getters ===========
      */
 
-    double getBalance() {
-        if (balance > 0) {
-            return balance;
-        } else
-            return 0;
+    public int getTerm() {
+        return this.offering.getTerm();
     }
 
-    int getTerm() {
-    	this.term = this.offering.getTerm();
-		return this.term;
+    public java.util.Date getStartDate() {
+        return this.startDate;
     }
-
-    public Date getStartDate() {
-		return startDate;
-	}
-
-    long getAccountNumber() {
-        return (long) ((Math.ceil(Math.random() * 10) + 1000));
-    }
-
-    
-    public void setBalance(double balance) {
-		this.balance = balance;
-	}
-    
-    double futureValue() {
-        return balance * Math.pow(1 + offering.getInterestRate(), offering.getTerm());
-    }
-    
-    public void setOffering(CDOffering offering) {
-		this.offering = offering;
-	}
-    
-    public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
 }

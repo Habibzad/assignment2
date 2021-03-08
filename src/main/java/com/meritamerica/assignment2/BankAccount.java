@@ -11,6 +11,7 @@ public class BankAccount {
     BankAccount(double balance, double interestRate) {
         this.balance = balance;
         this.interestRate = interestRate;
+        this.accountNumber = MeritBank.getNextAccountNumber();
     }
 
     BankAccount(long accountNumber, double balance, double interestRate) {
@@ -18,42 +19,23 @@ public class BankAccount {
         this.balance = balance;
         this.interestRate = interestRate;
     }
-    
-    public BankAccount(double balance) {
-        this.balance = balance;
-        this.interestRate = 0;
-    }
 
-    /*=========== Getters ===========*/
+    /* =========== Getters =========== */
     long getAccountNumber() {
-    	return this.accountNumber;
+        return this.accountNumber;
     }
 
     double getBalance() {
-    	return this.balance;
+        return this.balance;
     }
 
     double getInterestRate() {
-    	return this.interestRate;
+        return this.interestRate;
     }
 
-    /*=========== Setters ===========*/
-    public void setAccountNumber(long accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-
-    public void setInterestRate(double interestRate) {
-        this.interestRate = interestRate;
-    }
-    
-    
-    /*=========== Deposit, Withdraw and Future Value ===========*/
+    /* =========== Deposit, Withdraw and Future Value =========== */
     boolean withdraw(double amount) {
-    	if (amount >= 0 && amount <= this.balance) {
+        if (amount >= 0 && amount <= this.balance) {
             this.balance -= amount;
             return true;
         } else {
@@ -62,7 +44,7 @@ public class BankAccount {
     }
 
     boolean deposit(double amount) {
-    	if (amount >= 0) {
+        if (amount >= 0) {
             this.balance += amount;
             return true;
         } else {
@@ -71,7 +53,7 @@ public class BankAccount {
     }
 
     double futureValue(int years) {
-    	double futureBalanace = this.balance * Math.pow((1 + this.interestRate), years);
+        double futureBalanace = this.balance * Math.pow((1 + this.interestRate), years);
         return futureBalanace;
     }
 

@@ -18,9 +18,9 @@ public class AccountHolder {
     private String lastName;
     private String ssn;
 
-    private ArrayList<CheckingAccount> checkingAccounts = new ArrayList<CheckingAccount>();
-    private ArrayList<SavingsAccount> savingsAccounts = new ArrayList<SavingsAccount>();
-    private ArrayList<CDAccount> cdAccounts = new ArrayList<CDAccount>();
+    private CheckingAccount[] checkingAccounts;
+    private SavingsAccount[] savingsAccounts;
+    private CDAccount[] cdAccounts;
 
     // Default Constructor
     AccountHolder() {
@@ -32,6 +32,9 @@ public class AccountHolder {
         this.middleName = middleName;
         this.lastName = lastName;
         this.ssn = ssn;
+        this.checkingAccounts = new CheckingAccount[0];
+        this.savingsAccounts = new SavingsAccount[0];
+        this.cdAccounts = new CDAccount[0];
     }
 
     /*
@@ -54,64 +57,55 @@ public class AccountHolder {
     }
 
     public int getNumberOfCheckingAccounts() {
-        return this.checkingAccounts.size();
+        return this.checkingAccounts.length;
     }
 
     public double getCheckingBalance() {
-        double totalBalance = 0;
-        if (this.checkingAccounts != null) {
-            for (CheckingAccount account : this.checkingAccounts) {
-                totalBalance += account.getBalance();
-            }
+        double result = 0.0;
+        for (CheckingAccount account : this.checkingAccounts) {
+            result += account.getBalance();
         }
-        return totalBalance;
+        return result;
     }
 
     public int getNumberOfSavingsAccounts() {
-        return this.savingsAccounts.size();
+        return this.savingsAccounts.length;
     }
 
     public double getSavingsBalance() {
-        double totalBalance = 0;
-        if (this.savingsAccounts != null) {
-            for (SavingsAccount account : this.savingsAccounts) {
-                totalBalance += account.getBalance();
-            }
+        double result = 0.0;
+        for (SavingsAccount account : this.savingsAccounts) {
+            result += account.getBalance();
         }
-        return totalBalance;
+        return result;
     }
 
     public int getNumberOfCDAccounts() {
-        return this.cdAccounts.size();
+        return this.cdAccounts.length;
     }
 
     public double getCDBalance() {
-        double totalBalance = 0;
-        if (this.cdAccounts != null) {
-            for (CDAccount account : this.cdAccounts) {
-                totalBalance += account.getBalance();
-            }
+        double result = 0.0;
+        for (CDAccount account : this.cdAccounts) {
+            result += account.getBalance();
         }
-        return totalBalance;
+        return result;
     }
 
     public double getCombinedBalance() {
-        return getCheckingBalance() + getSavingsBalance();
+        return getCheckingBalance() + getSavingsBalance() + this.getCDBalance();
     }
 
     CheckingAccount[] getCheckingAccounts() {
-        CheckingAccount[] accounts = this.checkingAccounts.toArray(new CheckingAccount[checkingAccounts.size()]);
-        return accounts;
+        return this.checkingAccounts;
     }
 
     SavingsAccount[] getSavingsAccounts() {
-        SavingsAccount[] accounts = this.savingsAccounts.toArray(new SavingsAccount[savingsAccounts.size()]);
-        return accounts;
+        return this.savingsAccounts;
     }
 
     CDAccount[] getCDAccounts() {
-        CDAccount[] accounts = this.cdAccounts.toArray(new CDAccount[this.cdAccounts.size()]);
-        return accounts;
+        return this.cdAccounts;
     }
 
     // To String Method
@@ -143,85 +137,82 @@ public class AccountHolder {
      */
 
     CheckingAccount addCheckingAccount(double openingBalance) {
-        double totalBalance = getCombinedBalance();
-        if ((openingBalance + totalBalance) > MeritBank.accountLimit) {
-            System.out.println(
-                    "!!! An account holder has combined balances exceeding $250,000, system could not create new account !!!");
-            return null;
-        } else {
-            long newAccountNumber = MeritBank.getNextAccountNumber();
-            double interest = 0.0001;
-            CheckingAccount account = new CheckingAccount(newAccountNumber, openingBalance, interest);
-            try {
-            	this.checkingAccounts.add(account);
-            }catch (NullPointerException e) {
-            	System.out.println("Exception occured:");
-            }
-            return account;
+        if (this.getCheckingBalance() + this.getSavingsBalance() + openingBalance < MeritBank.balanceLimit) {
+            // Instantiate a new Checking Account Array and add one to its size
+            CheckingAccount[] temp = new CheckingAccount[this.checkingAccounts.length + 1];
+
+            for (int i = 0; i < this.checkingAccounts.length; i++)
+                temp[i] = this.checkingAccounts[i];
+
+            temp[temp.length - 1] = new CheckingAccount(openingBalance);
+            this.checkingAccounts = temp;
+
         }
+        return null;
     }
 
     CheckingAccount addCheckingAccount(CheckingAccount checkingAccount) {
-        double totalBalance = getCombinedBalance();
-        if ((checkingAccount.getBalance() + totalBalance) > MeritBank.accountLimit) {
+        if (this.getCheckingBalance() + this.getSavingsBalance() + checkingAccount.getBalance() < 250000) {
+            CheckingAccount[] temp = new CheckingAccount[this.checkingAccounts.length + 1];
 
-            System.out.println(
-                    "!!! An account holder has combined balances exceeding $250,000, system could not create new account !!!");
-            return null;
-        }
+            for (int i = 0; i < this.checkingAccounts.length; i++)
+                temp[i] = this.checkingAccounts[i];
 
-        else {
+            temp[temp.length - 1] = checkingAccount;
+            this.checkingAccounts = temp;
 
-            this.checkingAccounts.add(checkingAccount);
             return checkingAccount;
         }
+        return null;
     }
 
     SavingsAccount addSavingsAccount(double openingBalance) {
-        double totalBalance = getCombinedBalance();
-        
-        /*
-        if ((openingBalance + totalBalance) > MeritBank.accountLimit) {
+        if (this.getCheckingBalance() + this.getSavingsBalance() + openingBalance < 250000) {
+            SavingsAccount[] temp = new SavingsAccount[this.savingsAccounts.length + 1];
 
-            System.out.println(
-                    "!!! An account holder has combined balances exceeding $250,000, system could not create new account !!!");
-            return null;
+            for (int i = 0; i < this.savingsAccounts.length; i++)
+                temp[i] = this.savingsAccounts[i];
+
+            temp[temp.length - 1] = new SavingsAccount(openingBalance);
+            this.savingsAccounts = temp;
+
+            return this.savingsAccounts[this.savingsAccounts.length - 1];
         }
-
-        else {
-
-            
-        }*/
-        long newAccountNumber = MeritBank.getNextAccountNumber();
-
-        double interest = 0.01;
-
-        SavingsAccount account = new SavingsAccount(newAccountNumber, openingBalance, interest);
-        this.savingsAccounts.add(account);
-        return account;
+        return null;
     }
 
     SavingsAccount addSavingsAccount(SavingsAccount savingsAccount) {
-        double totalBalance = getCombinedBalance();
-        if ((savingsAccount.getBalance() + totalBalance) > MeritBank.accountLimit) {
+        if (this.getCheckingBalance() + this.getSavingsBalance() + savingsAccount.getBalance() < 250000) {
+            SavingsAccount[] temp = new SavingsAccount[this.savingsAccounts.length + 1];
 
-            System.out.println(
-                    "!!! An account holder has combined balances exceeding $250,000, system could not create new account !!!");
-            return null;
+            for (int i = 0; i < this.savingsAccounts.length; i++)
+                temp[i] = this.savingsAccounts[i];
+
+            temp[temp.length - 1] = savingsAccount;
+            this.savingsAccounts = temp;
+
+            return this.savingsAccounts[this.savingsAccounts.length - 1];
         }
-
-        this.savingsAccounts.add(savingsAccount);
-        return savingsAccount;
+        return null;
     }
 
-    CDAccount addCDAccount(CDOffering offering, double openingBalance) {
-        CDAccount account = new CDAccount(offering, openingBalance);
-        return account;
+    CDAccount addCDAccount(CDOffering cdOffering, double openingBalance) {
+        if (cdOffering == null) return null;
+        return this.addCDAccount(new CDAccount(cdOffering, openingBalance));
     }
 
     CDAccount addCDAccount(CDAccount cdAccount) {
-        this.cdAccounts.add(cdAccount);
-        return cdAccount;
-    }
+        if (cdAccount == null)
+            return null;
 
+        CDAccount[] temp = new CDAccount[this.cdAccounts.length + 1];
+
+        for (int i = 0; i < this.cdAccounts.length; i++)
+            temp[i] = this.cdAccounts[i];
+
+        temp[temp.length - 1] = cdAccount;
+        this.cdAccounts = temp;
+
+        return this.cdAccounts[this.cdAccounts.length - 1];
+    }
 }
