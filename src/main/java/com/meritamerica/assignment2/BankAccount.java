@@ -1,5 +1,6 @@
 package com.meritamerica.assignment2;
 
+//Bank account is the parent to checking and savings account.
 public class BankAccount {
 
     // Instance variables

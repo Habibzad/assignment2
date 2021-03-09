@@ -1,218 +1,231 @@
 package com.meritamerica.assignment2;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-
 /**
- * This class contains the information pertaining to the account holder
- * 
- * @author Ahmad Habibzad
+ * AccounHolder class parameterized constructor: 
+ * 	1. contains all information pertaining to the account holder
+ * 	2. sets & gets client information
+ * 	3. initializes arrays for each type of account
+ *	4. gets account balances 
+ *	5. totals and returns current balances for all accounts per client
+ *	6. totals and returns all holdings for all clients at MeritBank
  */
 
 public class AccountHolder {
-    /*
-     * ================= Instance variabls =================
-     */
-    private String firstName;
-    private String middleName;
-    private String lastName;
-    private String ssn;
+	private String firstName;
+	private String middleName;
+	private String lastName;
+	private String ssn;
 
-    private CheckingAccount[] checkingAccounts;
-    private SavingsAccount[] savingsAccounts;
-    private CDAccount[] cdAccounts;
+	private CheckingAccount[] chkAcctsArray;
+	private SavingsAccount[] savAcctsArray;
+	private CDAccount[] cdAcctsArray;
 
-    // Default Constructor
-    AccountHolder() {
-    }
+	AccountHolder(String firstName, String middleName, String lastName, String ssn) {
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
+		this.ssn = ssn;
+		
+		chkAcctsArray = new CheckingAccount[0];
+		savAcctsArray = new SavingsAccount[0];
+		cdAcctsArray = new CDAccount[0];
+	}
 
-    // Parametarized Constructor
-    AccountHolder(String firstName, String middleName, String lastName, String ssn) {
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-        this.ssn = ssn;
-        this.checkingAccounts = new CheckingAccount[0];
-        this.savingsAccounts = new SavingsAccount[0];
-        this.cdAccounts = new CDAccount[0];
-    }
+	public String getFirstName() {
+		return firstName;
+	}
 
-    /*
-     * ======= Getters =======
-     */
-    public String getFirstName() {
-        return firstName;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public String getMiddleName() {
-        return middleName;
-    }
+	public String getMiddleName() {
+		return middleName;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
 
-    public String getSSN() {
-        return ssn;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public int getNumberOfCheckingAccounts() {
-        return this.checkingAccounts.length;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public double getCheckingBalance() {
-        double result = 0.0;
-        for (CheckingAccount account : this.checkingAccounts) {
-            result += account.getBalance();
-        }
-        return result;
-    }
+	public Object getSSN() {
+		return ssn;
+	}
 
-    public int getNumberOfSavingsAccounts() {
-        return this.savingsAccounts.length;
-    }
+	public void setSSN(String ssn) {
+		this.ssn = ssn;
+	}
 
-    public double getSavingsBalance() {
-        double result = 0.0;
-        for (SavingsAccount account : this.savingsAccounts) {
-            result += account.getBalance();
-        }
-        return result;
-    }
+	public int getNumberOfCheckingAccounts() {
+		return this.chkAcctsArray.length;
+	}
 
-    public int getNumberOfCDAccounts() {
-        return this.cdAccounts.length;
-    }
+	public double getCheckingBalance() {
+		double result = 0.0;
+		for (CheckingAccount account : this.chkAcctsArray) {
+			result += account.getBalance();
+		}
+		return result;
+	}
 
-    public double getCDBalance() {
-        double result = 0.0;
-        for (CDAccount account : this.cdAccounts) {
-            result += account.getBalance();
-        }
-        return result;
-    }
+	public int getNumberOfSavingsAccounts() {
+		return this.savAcctsArray.length;
+	}
 
-    public double getCombinedBalance() {
-        return getCheckingBalance() + getSavingsBalance() + this.getCDBalance();
-    }
+	public double getSavingsBalance() {
+		double result = 0.0;
+		for (SavingsAccount account : this.savAcctsArray) {
+			result += account.getBalance();
+		}
+		return result;
+	}
 
-    CheckingAccount[] getCheckingAccounts() {
-        return this.checkingAccounts;
-    }
+	public int getNumberOfCDAccounts() {
+		return this.cdAcctsArray.length;
+	}
 
-    SavingsAccount[] getSavingsAccounts() {
-        return this.savingsAccounts;
-    }
+	public double getCDBalance() {
+		double result = 0.0;
+		for (CDAccount account : this.cdAcctsArray) {
+			result += account.getBalance();
+		}
+		return result;
+	}
 
-    CDAccount[] getCDAccounts() {
-        return this.cdAccounts;
-    }
+	public double getCombinedBalance() {
+		return getCheckingBalance() + getSavingsBalance() + this.getCDBalance();
+	}
 
-    // To String Method
-    public String toString() {
-        return "Name: " + this.firstName + " " + this.middleName + " " + this.lastName + " " + this.ssn;
-    }
+	CheckingAccount[] getCheckingAccounts() {
+		return this.chkAcctsArray;
+	}
 
-    /*
-     * ======= Setters =======
-     */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	SavingsAccount[] getSavingsAccounts() {
+		return this.savAcctsArray;
+	}
 
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
-    }
+	CDAccount[] getCDAccounts() {
+		return this.cdAcctsArray;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	// To String Method
+	public String toString() {
+		return "Name: " + this.firstName + " " + this.middleName + " " + this.lastName + " " + this.ssn;
+	}
 
-    public void setSsn(String ssn) {
-        this.ssn = ssn;
-    }
+	/*
+	 * addCheckingAccount() and addSavingsAccount() methods: 
+	 * 1. First if() checks openingBalance is not greater than the $250,000 limit. 
+	 * 2. Second if() checks openingBalance does not push balance above $250,000 limit. 
+	 * 3. Loops through the newChkAcct[] array and adds a new account. 
+	 * 4. Creates a new index for the next new account and the openingBalance amount. 5.
+	 */
+	CheckingAccount addCheckingAccount(double openingBalance) {
+		if (openingBalance <= 250000) {
+			if (getCheckingBalance() + getSavingsBalance() + openingBalance <= 250000) {
+				CheckingAccount[] newChkAcct = new CheckingAccount[this.chkAcctsArray.length + 1];
 
-    /*
-     * ======= Add Account methods =======
-     */
+				for (int i = 0; i < this.chkAcctsArray.length; i++) {
+					newChkAcct[i] = this.chkAcctsArray[i];
+				}
+				
+				newChkAcct[newChkAcct.length - 1] = new CheckingAccount(openingBalance);
+				this.chkAcctsArray = newChkAcct;
+				return this.chkAcctsArray[this.chkAcctsArray.length - 1];
+			}
+		}
+		
+		System.out.println("Unable to open Checking Account: Deposit exceeds $250,000.");
+		return null;
+	}
 
-    CheckingAccount addCheckingAccount(double openingBalance) {
-        if (this.getCheckingBalance() + this.getSavingsBalance() + openingBalance < MeritBank.balanceLimit) {
-            // Instantiate a new Checking Account Array and add one to its size
-            CheckingAccount[] temp = new CheckingAccount[this.checkingAccounts.length + 1];
+	CheckingAccount addCheckingAccount(CheckingAccount checkingAccount) {
 
-            for (int i = 0; i < this.checkingAccounts.length; i++)
-                temp[i] = this.checkingAccounts[i];
+		if (getCheckingBalance() + getSavingsBalance() + checkingAccount.getBalance() <= 250000) {
 
-            temp[temp.length - 1] = new CheckingAccount(openingBalance);
-            this.checkingAccounts = temp;
+			CheckingAccount[] newChkAcct = new CheckingAccount[this.chkAcctsArray.length + 1];
 
-        }
-        return null;
-    }
+			for (int i = 0; i < this.chkAcctsArray.length; i++) {
+				newChkAcct[i] = this.chkAcctsArray[i];
+			}
+			newChkAcct[newChkAcct.length - 1] = checkingAccount;
+			this.chkAcctsArray = newChkAcct;
+			return checkingAccount;
+		}
+		return null;
+	}
 
-    CheckingAccount addCheckingAccount(CheckingAccount checkingAccount) {
-        if (this.getCheckingBalance() + this.getSavingsBalance() + checkingAccount.getBalance() < 250000) {
-            CheckingAccount[] temp = new CheckingAccount[this.checkingAccounts.length + 1];
+	SavingsAccount addSavingsAccount(double openingBalance) {
+		if (openingBalance <= 250000) {
+			if (getCheckingBalance() + getSavingsBalance() + openingBalance < 250000) {
+				
+				SavingsAccount[] newSavAcct = new SavingsAccount[this.savAcctsArray.length + 1];
 
-            for (int i = 0; i < this.checkingAccounts.length; i++)
-                temp[i] = this.checkingAccounts[i];
+				for (int i = 0; i < this.savAcctsArray.length; i++) {
+					newSavAcct[i] = this.savAcctsArray[i];
+				}
+				newSavAcct[newSavAcct.length - 1] = new SavingsAccount(openingBalance);
+				this.savAcctsArray = newSavAcct;
+				return this.savAcctsArray[this.savAcctsArray.length - 1];
+			}
+		}
+		System.out.println("Unable to open Savings Account: Deposit exceeds $250,000.");
+		return null;
+	}
 
-            temp[temp.length - 1] = checkingAccount;
-            this.checkingAccounts = temp;
+	SavingsAccount addSavingsAccount(SavingsAccount savingsAccount) {
+		if (getCheckingBalance() + getSavingsBalance() + savingsAccount.getBalance() < 250000) {
+			
+			SavingsAccount[] newSavAcct = new SavingsAccount[this.savAcctsArray.length + 1];
 
-            return checkingAccount;
-        }
-        return null;
-    }
+			for (int i = 0; i < this.savAcctsArray.length; i++) {
+				newSavAcct[i] = this.savAcctsArray[i];
+			}
+			newSavAcct[newSavAcct.length - 1] = savingsAccount;
+			this.savAcctsArray = newSavAcct;
+			return this.savAcctsArray[this.savAcctsArray.length - 1];
+		}
+		return null;
+	}
+	/*
+	 * addCDAccount() method: 
+	 * 1. Check to make sure there are actually some CD offerings. 
+	 * 2. Return null if there are no CD offerings. 
+	 */
 
-    SavingsAccount addSavingsAccount(double openingBalance) {
-        if (this.getCheckingBalance() + this.getSavingsBalance() + openingBalance < 250000) {
-            SavingsAccount[] temp = new SavingsAccount[this.savingsAccounts.length + 1];
+	CDAccount addCDAccount(CDOffering cdOffering, double openingBalance) {
+		if (cdOffering == null) {
+			return null;
+		}
+		return addCDAccount(new CDAccount(cdOffering, openingBalance));
+	}
 
-            for (int i = 0; i < this.savingsAccounts.length; i++)
-                temp[i] = this.savingsAccounts[i];
+	/* 
+	 * addCDAccount () method: 
+	 * 1. Loops through the newCDAcct[] array and adds a new account. 
+	 * 2. Creates a new index for the each new CD account.
+	 */
+	CDAccount addCDAccount(CDAccount cdAccount) {
+		if (cdAccount == null) {
+			return null;
+		}
+		CDAccount[] newCDAcct = new CDAccount[this.cdAcctsArray.length + 1];
 
-            temp[temp.length - 1] = new SavingsAccount(openingBalance);
-            this.savingsAccounts = temp;
-
-            return this.savingsAccounts[this.savingsAccounts.length - 1];
-        }
-        return null;
-    }
-
-    SavingsAccount addSavingsAccount(SavingsAccount savingsAccount) {
-        if (this.getCheckingBalance() + this.getSavingsBalance() + savingsAccount.getBalance() < 250000) {
-            SavingsAccount[] temp = new SavingsAccount[this.savingsAccounts.length + 1];
-
-            for (int i = 0; i < this.savingsAccounts.length; i++)
-                temp[i] = this.savingsAccounts[i];
-
-            temp[temp.length - 1] = savingsAccount;
-            this.savingsAccounts = temp;
-
-            return this.savingsAccounts[this.savingsAccounts.length - 1];
-        }
-        return null;
-    }
-
-    CDAccount addCDAccount(CDOffering cdOffering, double openingBalance) {
-        if (cdOffering == null) return null;
-        return this.addCDAccount(new CDAccount(cdOffering, openingBalance));
-    }
-
-    CDAccount addCDAccount(CDAccount cdAccount) {
-        if (cdAccount == null)
-            return null;
-
-        CDAccount[] temp = new CDAccount[this.cdAccounts.length + 1];
-
-        for (int i = 0; i < this.cdAccounts.length; i++)
-            temp[i] = this.cdAccounts[i];
-
-        temp[temp.length - 1] = cdAccount;
-        this.cdAccounts = temp;
-
-        return this.cdAccounts[this.cdAccounts.length - 1];
-    }
+			for (int i = 0; i < this.cdAcctsArray.length; i++) {
+				newCDAcct[i] = this.cdAcctsArray[i];
+			}
+			newCDAcct[newCDAcct.length - 1] = cdAccount;
+			this.cdAcctsArray = newCDAcct;
+			return this.cdAcctsArray[this.cdAcctsArray.length - 1];
+	}
 }
+
+
+
+

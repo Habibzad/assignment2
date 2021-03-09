@@ -1,111 +1,173 @@
 package com.meritamerica.assignment2;
 
 public class MeritAmericaBankApp {
-    public static void main(String[] args) {
 
-        CDOffering[] CDOfferings = new CDOffering[5];
-        CDOfferings[0] = new CDOffering(1, 1.8 / 100);
-        CDOfferings[1] = new CDOffering(2, 1.9 / 100);
-        CDOfferings[2] = new CDOffering(3, 2.0 / 100);
-        CDOfferings[3] = new CDOffering(5, 2.5 / 100);
-        CDOfferings[4] = new CDOffering(10, 2.2 / 100);
-        MeritBank.setCDOfferings(CDOfferings);
+	public static void main(String[] args) {
 
-        // Instantiate a new AccountHolder (acc1)
-        AccountHolder acc1_holder = new AccountHolder("John", "", "Doe", "555-00-8899");
-        System.out.println("New Account:");
-        System.out.println("acc1_holder=" + acc1_holder.getFirstName() + " " + acc1_holder.getLastName());
-        System.out.println("-----------------------------------------------------\n");
-        /*Add a checking account with an opening balance of $1,000 and
-        a savings account with an opening balance of $10,000 to acc1*/
-        System.out.println("acc1_holder, opening balance of $1,000 and $10,000");
-        acc1_holder.addCheckingAccount(1000);
-        acc1_holder.addSavingsAccount(10000);
+		CDOffering[] CDOfferings = new CDOffering[5];
+		CDOfferings[0] = new CDOffering(1, 1.8 / 100);
+		CDOfferings[1] = new CDOffering(2, 1.9 / 100);
+		CDOfferings[2] = new CDOffering(3, 2.0 / 100);
+		CDOfferings[3] = new CDOffering(5, 2.5 / 100);
+		CDOfferings[4] = new CDOffering(10, 2.2 / 100);
+		MeritBank.setCDOfferings(CDOfferings);
 
-        System.out.println("-----------------------------------------------------\n");
+		/* 4.a.ii Instantiate a new AccountHolder (ah1) */
+		String ah1FirstName = "Augusta";
+		String ah1MiddleName = "Ada";
+		String ah1LastName = "Byron";
+		String ah1SSN = "181-50-1852";
+		String ah1NameConcat = ah1FirstName + " " + ah1MiddleName + " " + ah1LastName;
 
-        /*Add another checking account with an opening balance of $5,000 and a
-        savings account with an opening balance of $50,000 to acc1*/
-        System.out.println("acc1_holder, opening balance of $5,000 and $50,000");
-        acc1_holder.addCheckingAccount(5000);
-        acc1_holder.addSavingsAccount(50000);
-        
-        System.out.println(
-                "Current combined balance of " + acc1_holder.getFirstName() + " is: " + acc1_holder.getCombinedBalance());
-        System.out.println("-----------------------------------------------------\n");
+		AccountHolder ah1 = new AccountHolder(ah1FirstName, ah1MiddleName, ah1LastName, ah1SSN);
+		System.out.println("*************************\n" 
+							+ ah1NameConcat + "\n" 
+							+ ah1SSN 
+							+ "\n*************************\n");
 
-        /*Add a checking account with an opening balance of $50,000 and a
-        savings account with an opening balance of $500,000 to acc1 */
-        System.out.println("acc1_holder, opening balance of $50,000 and $500,000");
-        acc1_holder.addCheckingAccount(50000);
-        acc1_holder.addSavingsAccount(500000);
-        
-        System.out.println(
-        		"Current combined balance of " + acc1_holder.getFirstName() + " is: " + acc1_holder.getCombinedBalance());
-        System.out.println("-----------------------------------------------------\n");
+		/*
+		 * 4.a.iii Add a checking account with an opening balance of $1,000 as well as a
+		 * savings account with an opening balance of $10,000 to ah1
+		 */
+		System.out.println(">> [4.a.iii] Add a Checking Account: $1,000 and Savings Account: $10,000 <<");
+		System.out.println(ah1.addCheckingAccount(1000));
+		System.out.println(ah1.addSavingsAccount(10000));
+		System.out.println("----------------------------------------------------------------");
+		System.out.println(">> Current balance for " + ah1NameConcat + " is: " + ah1.getCombinedBalance());
+		System.out.println("----------------------------------------------------------------\n");
 
-        /*Add another checking account with an opening balance of $5,000 and a
-        savings account with an opening balance of $50,000 to acc1*/
-        System.out.println("acc1_holder, opening balance of $5,000 and $50,000");
-        acc1_holder.addCheckingAccount(5000);
-        acc1_holder.addSavingsAccount(50000);
-        
-        System.out.println(
-        		"Current combined balance of " + acc1_holder.getFirstName() + " is: " + acc1_holder.getCombinedBalance());
-        System.out.println("-----------------------------------------------------\n");
+		/*
+		 * 4.a.iv Add a checking account with an opening balance of $5,000 as well as a
+		 * savings account with an opening balance of $50,000 to ah1
+		 */
+		System.out.println(">> [4.a.iv] Add a Checking Account: $5,000 and Savings Account: $50,000 <<");
+		System.out.println(ah1.addCheckingAccount(5000));
+		System.out.println(ah1.addSavingsAccount(50000));
+		System.out.println("----------------------------------------------------------------");
+		System.out.println("Current balance for " + ah1NameConcat + " is: " + ah1.getCombinedBalance());
+		System.out.println("----------------------------------------------------------------\n");
 
-        /* Add the best CD offering as a CD account on acc1 */
-        acc1_holder.addCDAccount(MeritBank.getBestCDOffering(1000), 1000);
+		/*
+		 * 4.a.v Add a checking account with an opening balance of $50,000 as well as a
+		 * savings account with an opening balance of $500,000 to ah1
+		 */
+		System.out.println(">> [4.a.v] Add a Checking Account: $50,000 and Savings Account: $500,000 <<");
+		System.out.println(ah1.addCheckingAccount(50000));
+		System.out.println(ah1.addSavingsAccount(500000));
+		System.out.println("----------------------------------------------------------------");
+		System.out.println("Current balance for " + ah1NameConcat + " is: " + ah1.getCombinedBalance());
+		System.out.println("----------------------------------------------------------------\n");
 
-        // Add acc1 to Merit Bank's list of account holders
-        MeritBank.addAccountHolder(acc1_holder);
+		/*
+		 * 4.a.vi Add a checking account with an opening balance of $5,000 as well as a
+		 * savings account with an opening balance of $50,000 to ah1
+		 */
+		System.out.println("\n>> [4.a.vi] Add a Checking Account: $5,000 and Savings Account: $50,000 <<");
+		System.out.println(ah1.addCheckingAccount(5000));
+		System.out.println(ah1.addSavingsAccount(50000));
+		System.out.println("----------------------------------------------------------------");
+		System.out.println("Current balance for " + ah1NameConcat + " is: " + ah1.getCombinedBalance());
+		System.out.println("----------------------------------------------------------------\n");
 
-        // Instantiate a new AccountHolder (acc2)
-        AccountHolder acc2_holder = new AccountHolder("Lisa", "J", "Thompson", "897-50-2212");
-        System.out.println("acc2_holder=" + acc2_holder.getFirstName() + " " + acc2_holder.getLastName());
-        System.out.println("-----------------------------------------------------\n");
+		/*
+		 * 4.a.vii Add the best CD offering as a CD account on ah1
+		 */
+		System.out.println("\n>> [4.a.vii] Add the best CD offering to " + ah1NameConcat + " <<");
+		System.out.println(ah1.addCDAccount(MeritBank.getBestCDOffering(1000), 1000));
+		System.out.println("----------------------------------------------------------------");
+		System.out.println("Combined balance for " + ah1NameConcat + " is: " + ah1.getCombinedBalance());
+		System.out.println("----------------------------------------------------------------\n");
 
-        /*Add a checking account with an opening balance of $1,000 as well as a
-        savings account with an opening balance of $10,000 to acc2 */
-        System.out.println("acc2_holder, opening balance of $1,000 and $10,000");
-        acc2_holder.addCheckingAccount(new CheckingAccount(1000));
-        acc2_holder.addSavingsAccount(new SavingsAccount(10000));
-        
-        System.out.println("Current combined balance of " + acc1_holder.getFirstName() + " is: " + acc2_holder.getCombinedBalance());
-        System.out.println("-----------------------------------------------------\n");
+		/* 4.a.viii Add ah1 to Merit Bank's list of account holders */
+		MeritBank.addAccountHolder(ah1);
 
-        /* Add the second best CD offering as a CD account on acc2 */
-        acc2_holder.addCDAccount(MeritBank.getSecondBestCDOffering(1000), 1000);
-        System.out.println("-----------------------------------------------------\n");
+		// **********************************************************************************************************		
+		
+		/* 4.a.x Instantiate a new AccountHolder (ah2) */
+		String ah2FirstName = "Grace";
+		String ah2MiddleName = "Murray";
+		String ah2LastName = "Hopper";
+		String ah2SSN = "190-60-1992";
+		String ah2NameConcat = ah2FirstName + " " + ah2MiddleName + " " + ah2LastName;
 
-        /* Add acc1 to Merit Bank list of account holders */
-        MeritBank.addAccountHolder(acc2_holder);
+		AccountHolder ah2 = new AccountHolder(ah2FirstName, ah2MiddleName, ah2LastName, ah2SSN);
+		System.out.println("*************************\n" 
+				+ ah2NameConcat + "\n" 
+				+ ah2SSN 
+				+ "\n*************************\n");
 
-        /* Clear the CDs being offered by MeritBank */
+		/* 4.a.xi Add a checking account with an opening balance of $1,000 as well as a
+		 * savings account with an opening balance of $10,000 to ah2
+		 */
+		System.out.println(">> [4.a.xi] Add a Checking Account: $1,000 and Savings Account: $10,000 <<");
+		System.out.println(ah2.addCheckingAccount(1000));
+		System.out.println(ah2.addSavingsAccount(10000));
+		System.out.println("----------------------------------------------------------------");
+		System.out.println("Combined balance for " + ah2NameConcat + " is: " + ah2.getCombinedBalance());
+		System.out.println("----------------------------------------------------------------");
+
+		/*
+		 * 4.a.xii Add the second best CD offering as a CD account on ah2
+		 */
+		System.out.println("\n>> [4.a.xii] Add the second best CD offering to " + ah2NameConcat + " <<");
+		System.out.println(ah2.addCDAccount(MeritBank.getSecondBestCDOffering(1000), 1000));
+		System.out.println("----------------------------------------------------------------");
+		System.out.println("Combined balance for " + ah2NameConcat + " is: " + ah2.getCombinedBalance());
+		System.out.println("----------------------------------------------------------------\n");
+
+
+		/* 4.a.xiii Add ah2 to Merit Bank's list of account holders */
+		MeritBank.addAccountHolder(ah2);
+
+        /* 4.a.xiv Clear the CDs being offered by MeritBank */
         MeritBank.clearCDOfferings();
 
-        /* Instantiate a new AccountHolder (acc3) */
-        AccountHolder acc3_holder = new AccountHolder("James", "", "Wong", "154-00-2525");
-        System.out.println("acc1_holder=" + acc3_holder.getFirstName() + " " + acc3_holder.getLastName());
+        // **********************************************************************************************************		
+     	
+        /* 4.a.x Instantiate a new AccountHolder (ah2) */
+ 		String ah3FirstName = "Anita";
+ 		String ah3MiddleName = "Borg";
+ 		String ah3LastName = "Naffz";
+ 		String ah3SSN = "194-90-2003";
+ 		String ah3NameConcat = ah3FirstName + " " + ah3MiddleName + " " + ah3LastName;
 
-        System.out.println("-----------------------------------------------------\n");
+ 		AccountHolder ah3 = new AccountHolder(ah3FirstName, ah3MiddleName, ah3LastName, ah3SSN);
+		System.out.println("*************************\n" 
+				+ ah3NameConcat + "\n" 
+				+ ah3SSN 
+				+ "\n*************************\n");
 
-        /* Add a checking account with an opening balance of $1,000 and a
-        savings account with an opening balance of $10,000 to acc3 */
-        System.out.println("acc3_holder, opening balance of $1,000 and $10,000");
-        acc3_holder.addCheckingAccount(1000);
-        acc3_holder.addSavingsAccount(10000);
-        System.out.println("acc3_holder, current combine balance=" + acc3_holder.getCombinedBalance());
-        System.out.println("-----------------------------------------------------\n");
+		/*
+		 * 4.a.xvi Add the second best CD offering as a CD account on ah3
+		 */
+		System.out.println(">> [4.a.xvi] Add the second best CD offering to " + ah3NameConcat + " <<");
+		System.out.println(ah3.addCDAccount(MeritBank.getSecondBestCDOffering(1000), 1000));
+		System.out.println("----------------------------------------------------------------");
+		System.out.println("Combined balance for " + ah3NameConcat + " is: " + ah3.getCombinedBalance());
+		System.out.println("----------------------------------------------------------------");
 
-        /* Add acc3 to Merit Bank's list of account holders */
-        MeritBank.addAccountHolder(acc3_holder);
+		/*
+		 * 4.a.viii Add a checking account with an opening balance of $1,000 as well as a
+		 * savings account with an opening balance of $10,000 to ah3
+		 */
+		System.out.println(">> [4.a.viii] Add a Checking Account: $1,000 and Savings Account: $10,000 <<");
+		System.out.println(ah3.addCheckingAccount(1000));
+		System.out.println(ah3.addSavingsAccount(10000));
+		System.out.println("----------------------------------------------------------------");
+		System.out.println("Combined balance for " + ah3NameConcat + " is: " + ah3.getCombinedBalance());
+		System.out.println("----------------------------------------------------------------");
 
-        /* Get the total balance of all accounts held by Merit Bank's account holders */
-        double bankTotalBalance = MeritBank.totalBalances();
-        System.out
-                .println("The total balance of all accounts held by Merit Bank's account holders is: " + bankTotalBalance);
-        
 
-    }
+		/* 4.a.xix Add ah3 to Merit Bank's list of account holders */
+		MeritBank.addAccountHolder(ah3);
+
+		System.out.println("\n==============================================================================================");		
+    	
+		/* 4.a.xx Get the total balance of all accounts held by Merit Bank's account holders */
+		double bankTotalBalance = MeritBank.totalBalances();
+		System.out.println(
+				">> [4.a.xx] Total balance of all accounts held by Merit Bank's account holders is: " + bankTotalBalance);
+		System.out.println("==============================================================================================");		
+
+	}
 }

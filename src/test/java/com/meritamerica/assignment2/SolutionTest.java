@@ -60,7 +60,6 @@ public class SolutionTest {
     	MeritBank.setCDOfferings(CDOfferings);
     	
     	CDOffering[] fromMeritBankCDOfferings = MeritBank.getCDOfferings();
-
         assertEquals(1, fromMeritBankCDOfferings[0].getTerm());
         assertEquals(1.8/100, fromMeritBankCDOfferings[0].getInterestRate(),0);        
         assertEquals(2, fromMeritBankCDOfferings[1].getTerm(),0);
@@ -157,7 +156,7 @@ public class SolutionTest {
         assertEquals(1000, MeritBank.getAccountHolders()[0].getCheckingBalance(),0);    
         assertEquals(10000, MeritBank.getAccountHolders()[0].getSavingsBalance(),0);     	  	
     }
-    
+
     @Test    
     public void tesCDClearingByMeritBank() {
     	

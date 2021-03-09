@@ -1,27 +1,48 @@
 package com.meritamerica.assignment2;
 
-import java.util.Date;
+public class CDAccount {
+	
+	private CDOffering myOffering = null; 
+	private double endingBalance;
+	
+	//CDAccount is a constructor. It creates the object.
+	public CDAccount(CDOffering offering, double balance) {
+	   this.myOffering = offering;
+	   this.endingBalance = balance;
+	}
 
-public class CDAccount extends BankAccount {
+	public  double getBalance() {
+		return endingBalance;
+	}
+	
+	public double getInterestRate() {
+		return myOffering.getInterestRate();
+		
+	}
+	
+	public int getTerm() {
+		return myOffering.getTerm();
+	}
+	
+	public long getAccountNumber() {
+		return getAccountNumber();
+	}
+	
+	public double futureValue() {
+		return futureValue();
+	}
 
-    private Date startDate;
-    private CDOffering offering;
-
-    public CDAccount(CDOffering offering, double balance) {
-        super(balance, offering.getInterestRate());
-        this.offering = offering;
-        this.startDate = new Date();
-    }
-
-    /*
-     * =========== Getters ===========
-     */
-
-    public int getTerm() {
-        return this.offering.getTerm();
-    }
-
-    public java.util.Date getStartDate() {
-        return this.startDate;
-    }
+	public String toString() {
+		String myCDOff = ""; 
+		return myCDOff + this.myOffering;
+	}
 }
+
+
+
+
+
+
+
+
+

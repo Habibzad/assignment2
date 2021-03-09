@@ -1,23 +1,34 @@
 package com.meritamerica.assignment2;
 
 public class CDOffering {
-	
-	private int term;
-	private double interestRate;
-	
-	//Constructor
-	CDOffering(int term, double interestRate){
-		this.term = term;
-		this.interestRate = interestRate;
+
+	private int loanTerm;
+	private double intRate;
+
+	public CDOffering(int term, double interestRate) {
+		this.loanTerm = term;
+		this.intRate = interestRate;
+
 	}
 
-	//Getters
 	public int getTerm() {
-		return this.term;
+		return loanTerm;
+	}
+
+	public void setLoanTerm(int loanTerm) {
+		this.loanTerm = loanTerm;
 	}
 
 	public double getInterestRate() {
-		return this.interestRate;
+		return intRate;
+	}
+
+	public void setIntRate(double intRate) {
+		this.intRate = intRate;
 	}
 	
+	public String toString() {
+		String myCDOff = ""; 
+		return myCDOff + "Term: " + this.loanTerm + "\nRate: " + this.intRate;
+	}
 }
